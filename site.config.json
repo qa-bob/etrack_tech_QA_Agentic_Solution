@@ -1,0 +1,23 @@
+﻿{
+    "name":  "eTrack Tech",
+    "url":  "http://etracktech.com",
+    "description":  "",
+    "industry":  "",
+    "hasContactForm":  true,
+    "expectedNavItems":  [
+
+                         ],
+    "viewports":  [
+                      "desktop",
+                      "mobile",
+                      "tablet"
+                  ],
+    "skipVisual":  false,
+    "skipForms":  false,
+    "auth":  {
+                 "required":  false,
+                 "loginUrl":  "",
+                 "username":  "",
+                 "password":  ""
+             }
+}
