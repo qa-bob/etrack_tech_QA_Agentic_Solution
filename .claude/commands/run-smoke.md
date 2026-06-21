@@ -1,3 +1,8 @@
+---
+description: Run the @smoke test suite and display a formatted pass/fail summary with fix suggestions
+allowed-tools: Bash, Read
+---
+
 # /run-smoke
 
 Run the smoke test suite and display a clean pass/fail summary.

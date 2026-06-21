@@ -1,3 +1,9 @@
+---
+description: Crawl the target website and produce a fully-populated site.config.json with discovered nav, forms, and flags
+allowed-tools: WebFetch, Read, Write
+argument-hint: "[url: optional URL override — defaults to site.config.json]"
+---
+
 # /analyze-site
 
 Analyze a live website and produce a fully-populated `site.config.json`.

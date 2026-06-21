@@ -1,0 +1,35 @@
+{
+  "autoMemoryEnabled": true,
+  "permissions": {
+    "allow": [
+      "Bash(npm test)",
+      "Bash(npm run test:smoke)",
+      "Bash(npm run test:navigation)",
+      "Bash(npm run test:forms)",
+      "Bash(npm run test:visual)",
+      "Bash(npm run test:responsive)",
+      "Bash(npm run test:functional)",
+      "Bash(npm run test:headed)",
+      "Bash(npm run baseline)",
+      "Bash(npm run lint)",
+      "Bash(npm run typecheck)",
+      "Bash(npm run report)",
+      "Bash(npm ci)",
+      "Bash(npm install)",
+      "Bash(npx playwright test)",
+      "Bash(npx playwright test --project=chromium-desktop)",
+      "Bash(npx playwright test --project=mobile-chrome)",
+      "Bash(npx playwright test --project=tablet)",
+      "Bash(npx playwright test --grep @smoke)",
+      "Bash(npx playwright test --grep @navigation)",
+      "Bash(npx playwright test --grep @forms)",
+      "Bash(npx playwright test --grep @visual)",
+      "Bash(npx playwright test --grep @responsive)",
+      "Bash(npx playwright test --grep @functional)",
+      "Bash(npx playwright test --update-snapshots)",
+      "Bash(npx playwright install --with-deps chromium)",
+      "Bash(npx playwright show-report)",
+      "Bash(npx tsc --noEmit)"
+    ]
+  }
+}

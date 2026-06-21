@@ -1,3 +1,8 @@
+---
+description: Refresh visual regression baseline screenshots after intentional design changes
+allowed-tools: Bash, Read
+---
+
 # /update-baseline
 
 Capture new visual regression baseline screenshots after intentional design changes.

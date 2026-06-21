@@ -1,3 +1,8 @@
+---
+description: Parse test-results/results.json and display a structured pass/fail/flaky summary by tag
+allowed-tools: Bash, Read
+---
+
 # /generate-report
 
 Open the Playwright HTML report and display a structured summary of test results.
