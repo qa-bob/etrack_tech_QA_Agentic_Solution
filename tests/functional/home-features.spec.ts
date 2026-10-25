@@ -53,7 +53,7 @@ test.describe('Homepage Features @functional', () => {
     const firstHeading = homePage.page.locator('h1, h2, [role="banner"]').first();
     await expect(firstHeading).toBeVisible();
 
-    const isInViewport = await firstHeading.evaluate<boolean>((el) => {
+    const isInViewport = await firstHeading.evaluate((el) => {
       const rect = el.getBoundingClientRect();
       return rect.top < window.innerHeight && rect.bottom > 0;
     });
@@ -74,10 +74,7 @@ test.describe('Homepage Features @functional', () => {
   test('primary CTA is visible and has descriptive text @functional', async ({ homePage }) => {
     const ctaButtons = await homePage.getCTAButtons();
 
-    if (ctaButtons.length === 0) {
-      console.warn('[functional] No CTA buttons detected — skipping CTA text check.');
-      return;
-    }
+    test.skip(ctaButtons.length === 0, 'No CTA buttons detected');
 
     const firstCta = ctaButtons[0];
     await expect(firstCta, 'Primary CTA should be visible').toBeVisible();
