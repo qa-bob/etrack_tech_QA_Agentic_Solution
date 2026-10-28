@@ -13,7 +13,7 @@ import { test, expect } from '@fixtures/site.fixture';
 test.describe('Content Sections @functional', () => {
   test.beforeEach(async ({ page, siteConfig }) => {
     await page.goto(siteConfig.url, { waitUntil: 'domcontentloaded' });
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('load');
   });
 
   // ── Footer ─────────────────────────────────────────────────────────────────
@@ -51,7 +51,7 @@ test.describe('Content Sections @functional', () => {
       }
     });
 
-    await page.goto(siteConfig.url, { waitUntil: 'networkidle' });
+    await page.goto(siteConfig.url, { waitUntil: 'load' });
 
     expect(
       failedImages,
@@ -86,14 +86,15 @@ test.describe('Content Sections @functional', () => {
     const anchorLinks = page.locator('a[href^="#"]');
     const count = await anchorLinks.count();
 
-    if (count === 0) {
-      // Not all sites use anchor links — soft pass
-      return;
-    }
+    // Not all sites use anchor links
+    test.skip(count === 0, 'No in-page anchor links found');
 
     // Check that at least the first anchor's target element exists
     const firstHref = await anchorLinks.first().getAttribute('href');
-    if (!firstHref || firstHref === '#') return;
+    if (!firstHref || firstHref === '#') {
+      test.skip(true, 'First anchor link has no target id');
+      return;
+    }
 
     const targetId = firstHref.replace('#', '');
     const target = page.locator(`#${CSS.escape(targetId)}`);
@@ -111,10 +112,7 @@ test.describe('Content Sections @functional', () => {
       'link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]'
     ).first();
 
-    if (await faviconLink.count() === 0) {
-      console.warn('[functional] No <link rel="icon"> found. A favicon improves brand recognition.');
-      return;
-    }
+    test.skip(await faviconLink.count() === 0, 'No <link rel="icon"> found');
 
     const href = await faviconLink.getAttribute('href');
     expect(href).toBeTruthy();
@@ -135,8 +133,10 @@ test.describe('Content Sections @functional', () => {
   // ── Open Graph meta tags ───────────────────────────────────────────────────
 
   test('page has Open Graph meta tags for social sharing @functional', async ({ page }) => {
-    const ogTitle = await page.locator('meta[property="og:title"]').getAttribute('content');
-    const ogDescription = await page.locator('meta[property="og:description"]').getAttribute('content');
+    const ogTitleTag = page.locator('meta[property="og:title"]').first();
+    const ogTitle = (await ogTitleTag.count()) > 0 ? await ogTitleTag.getAttribute('content') : null;
+    const ogDescriptionTag = page.locator('meta[property="og:description"]').first();
+    const ogDescription = (await ogDescriptionTag.count()) > 0 ? await ogDescriptionTag.getAttribute('content') : null;
 
     if (!ogTitle && !ogDescription) {
       console.warn(
@@ -155,7 +155,7 @@ test.describe('Content Sections @functional', () => {
     const externalLinks = page.locator(`a[href]:not([href^="${siteOrigin}"]):not([href^="#"]):not([href^="/"]):not([href^="javascript"])`);
     const count = await externalLinks.count();
 
-    if (count === 0) return; // No external links found
+    test.skip(count === 0, 'No external links found');
 
     const missingTarget: string[] = [];
     for (let i = 0; i < Math.min(count, 10); i++) {
