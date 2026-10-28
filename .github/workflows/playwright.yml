@@ -1,14 +1,8 @@
 name: Playwright Full Suite
 
+# Manual only: the QA workflow (qa.yml) now runs smoke tests on push/PR and the scheduled suites.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
-    inputs:
-      site_url:
-        description: "Override site URL (leave blank to use site.config.json)"
-        required: false
-        default: ""
 
 jobs:
   test:
